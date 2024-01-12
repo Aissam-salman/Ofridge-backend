@@ -20,5 +20,15 @@ docker compose up #to see logs
 - phpmyadmin
 `http://localhost:7070`
 
-- mysql
-`mysql://root:secret@127.0.0.1:3306/app?serverVersion=8.2.0&charset=utf8mb4`
+- mysql host
+`172.18.0.2` port 3306
+
+## script for database mysql
+- reset database schema
+`./script/reset/reset_db.sh`
+
+- create database with tables
+`./script/start/start_db.sh`
+
+- initialize database with data
+`./script/start/init_db.sh`
