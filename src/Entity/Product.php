@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\BlobType;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
+use App\Entity\Nutriscore as Nutriscore;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'product')]
@@ -35,9 +35,9 @@ class Product {
     #[ORM\Column(name:"product_quantity", type: "float")]
     private float $quantity;
 
-    #[ORM\ManyToOne(targetEntity: "Nutriscore")]
+    #[ORM\ManyToOne(targetEntity: Nutriscore::class, inversedBy: "product")]
     #[ORM\JoinColumn(name: "nutriscore_id", referencedColumnName: "nutriscore_id")]
-    private int $nutriscore;
+    private Nutriscore $nutriscore;
 
     #[ORM\ManyToOne(targetEntity: "Category")]
     #[ORM\JoinColumn(name: "category_id", referencedColumnName: "category_id")]
@@ -124,14 +124,13 @@ class Product {
         return $this;
     }
 
-    public function getNutriscore(): ?int
+    public function getNutriscore(): ?Nutriscore
     {
         return $this->nutriscore;
     }
-    public function setNutriscore(int $pNutriscore): self
+    public function setNutriscore(?Nutriscore $pNutriscore): self
     {
         $this->nutriscore = $pNutriscore;
         return $this;
     }
-
 }
