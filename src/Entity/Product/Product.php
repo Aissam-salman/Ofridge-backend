@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Entity;
+namespace App\Entity\Product;
 
 use Doctrine\DBAL\Types\BlobType;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Nutriscore as Nutriscore;
-use App\Entity\Category as Category;
+use App\Entity\Product\Nutriscore as Nutriscore;
+use App\Entity\Product\Category as Category;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'product')]
