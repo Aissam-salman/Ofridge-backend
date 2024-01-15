@@ -36,12 +36,15 @@ class Product {
     #[ORM\Column(name:"product_quantity", type: "float")]
     private float $quantity;
 
-    #[ORM\ManyToOne(targetEntity: Nutriscore::class, inversedBy: "product")]
+    #[ORM\ManyToOne(targetEntity: Nutriscore::class, fetch: "LAZY")]
     #[ORM\JoinColumn(name: "nutriscore_id", referencedColumnName: "nutriscore_id")]
     private Nutriscore $nutriscore;
 
-    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: "category")]
-    #[ORM\JoinColumn(name: "category_id", referencedColumnName: "category_id")]
+
+    #[ORM\JoinTable(name: "product_category")]
+    #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
+    #[ORM\InverseJoinColumn(name:"category_id", referencedColumnName: "category_id")]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: "product", fetch: "LAZY")]
     private Category $category;
 
     public function getId(): ?int
