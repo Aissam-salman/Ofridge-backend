@@ -6,12 +6,14 @@ use Doctrine\DBAL\Types\BlobType;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Product\Nutriscore as Nutriscore;
 use App\Entity\Product\Category as Category;
+use App\Entity\Product\Country as Country;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'product')]
 class Product {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"NONE")]
+    #[ORM\GeneratedValue(strategy:"IDENTITY")]
     #[ORM\Column(name: "product_code",type: "integer")]
     private int $id;
 
@@ -45,7 +47,16 @@ class Product {
     #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
     #[ORM\InverseJoinColumn(name:"category_id", referencedColumnName: "category_id")]
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: "product", fetch: "LAZY")]
-    private Category $category;
+    private ArrayCollection|Category $category;
+
+    #[ORM\JoinTable(name: "location")]
+    #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
+    #[ORM\InverseJoinColumn(name:"country_id", referencedColumnName: "country_id")]
+    #[ORM\ManyToMany(targetEntity: Country::class, fetch: "LAZY")]
+    private ArrayCollection|Country $countries;
+
+
+
 
     public function getId(): ?int
     {

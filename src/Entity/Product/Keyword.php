@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: "keyword")]
 class Keyword {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "AUTO")]
+    #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(name: "keyword_id", type: "integer", nullable: false)]
     private int $id;
 

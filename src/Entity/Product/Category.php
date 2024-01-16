@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: "category")]
 class Category {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"AUTO")]
+    #[ORM\GeneratedValue(strategy:"IDENTITY")]
     #[ORM\Column(name: "category_id",type: "integer")]
     private int $id;
 

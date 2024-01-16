@@ -10,7 +10,7 @@ use App\Entity\Product\Unit;
 #[ORM\Table(name: "nutriment")]
 class Nutriment {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "AUTO")]
+    #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(name: "nutriment_id", type: "integer", nullable: false)]
     private int $id;
 
@@ -21,4 +21,22 @@ class Nutriment {
     #[ORM\JoinColumn(name: "unit_id", referencedColumnName: "unit_id")]
     private $unit;
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+    public function getName(): string
+    {
+        return $this->name;
+    }
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
 }

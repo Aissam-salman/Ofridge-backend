@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 class truc
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"AUTO")]
-    #[ORM\Column(name: "truc_id", type: "integer")]
+    #[ORM\GeneratedValue(strategy:"IDENTIFY")]
+    #[ORM\Column(name: "user", type: "integer")]
     private $id;
 
     #[ORM\Column(name: "truc_grade", type: "string", length: 2)]

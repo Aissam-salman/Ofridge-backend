@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Nutriscore
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy:"AUTO")]
+    #[ORM\GeneratedValue(strategy:"IDENTITY")]
     #[ORM\Column(name: "nutriscore_id", type: "integer")]
     private $id;
 
