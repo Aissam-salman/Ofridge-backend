@@ -31,4 +31,4 @@ docker compose up #to see logs
 `./script/start/start_db.sh`
 
 - initialize database with data
-`./script/start/init_db.s
+`./script/start/init_db.sh`
