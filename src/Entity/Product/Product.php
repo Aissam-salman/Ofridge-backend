@@ -78,7 +78,10 @@ class Product {
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: "myComposer", fetch: "LAZY")]
     private ArrayCollection|Product $composition;
 
-
+    #[ORM\Column(name: "product_created_at", type: "datetime", nullable: false)]
+    private \DateTimeInterface $createdAt;
+    #[ORM\Column(name: "product_updated_at", type: "datetime", nullable: false)]
+    private \DateTimeInterface $updatedAt;
 
 
     public function getId(): ?int
@@ -215,6 +218,24 @@ class Product {
     public function setComposition(ArrayCollection|Product $pComposition): self
     {
         $this->composition = $pComposition;
+        return $this;
+    }
+    public function getCreatedAt():?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+    public function setCreatedAt(\DateTimeInterface $pCreatedAt): self
+    {
+        $this->createdAt = $pCreatedAt;
+        return $this;
+    }
+    public function getUpdatedAt():?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+    public function setUpdatedAt(\DateTimeInterface $pUpdatedAt): self
+    {
+        $this->updatedAt = $pUpdatedAt;
         return $this;
     }
 }

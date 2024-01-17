@@ -15,6 +15,11 @@ class Country {
     #[ORM\Column(name: "country_name", type: "string", length: 30, nullable: false)]
     private string $name;
 
+    #[ORM\Column(name: "country_created_at", type: "datetime", nullable: false)]
+    private \DateTimeInterface $createdAt;
+    #[ORM\Column(name: "country_updated_at", type: "datetime", nullable: false)]
+    private \DateTimeInterface $updatedAt;
+
     public function getId():?int
     {
         return $this->id;
@@ -32,6 +37,15 @@ class Country {
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+    public function getCreatedAt():?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }

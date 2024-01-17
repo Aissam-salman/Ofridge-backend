@@ -6,7 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: "keyword")]
-class Keyword {
+class Keyword
+{
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(name: "keyword_id", type: "integer", nullable: false)]
@@ -15,7 +16,11 @@ class Keyword {
     #[ORM\Column(name: "keyword_name", type: "string", length: 30, nullable: false)]
     private string $name;
 
-    public function getId():?int
+    #[ORM\Column(name: "keyword_created_at", type: "datetime", nullable: false)]
+    private \DateTimeInterface $createdAt;
+    #[ORM\Column(name: "keyword_updated_at", type: "datetime", nullable: false)]
+    private \DateTimeInterface $updatedAt;
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -25,13 +30,22 @@ class Keyword {
         return $this;
     }
 
-    public function getName():?string
+    public function getName(): ?string
     {
         return $this->name;
     }
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+    public function getCreatedAt():?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
         return $this;
     }
 }
