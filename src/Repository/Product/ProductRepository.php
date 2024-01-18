@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Repository\Product;
 
 use App\Entity\Product\Product;
@@ -10,7 +9,6 @@ use App\ClientApi\OpenFactFoodapi;
 class ProductRepository extends ServiceEntityRepository
 {
     private OpenFactFoodapi $openFactFoodapi;
-
     public function __construct(ManagerRegistry $registry,OpenFactFoodapi $openFactFoodapi)
     {
         parent::__construct($registry, Product::class);
@@ -42,22 +40,18 @@ class ProductRepository extends ServiceEntityRepository
             throw new \InvalidArgumentException ("No products found with the provided product code.");
         }
     }
-
     public function apiFindProductsByKeyword(string $keyword): array
     {
         if (!is_string($keyword) || strlen(trim($keyword)) == 0) {
             throw new \InvalidArgumentException("Product name must be a non-empty string.");
         }
-
         return $this->openFactFoodapi->getByKeyword($keyword);
     }
-
     public function apiFindProductsByBarcode(int $barcode): array
     {
         if (!is_int($barcode) || preg_match('/^[0-9]+$/', $barcode) === 0) {
             throw new \InvalidArgumentException("Product code must be an integer.");
         }
-
         return $this->openFactFoodapi->getByBarcode($barcode);
     }
 }

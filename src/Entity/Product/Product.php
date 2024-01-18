@@ -2,7 +2,6 @@
 
 namespace App\Entity\Product;
 
-use Doctrine\DBAL\Types\BlobType;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Product\Nutriscore as Nutriscore;
 use App\Entity\Product\Category as Category;
@@ -30,8 +29,8 @@ class Product {
     #[ORM\Column(name:"product_generic_name",type: "string", length: 50, nullable: false)]
     private string $genericName;
 
-    #[ORM\Column(name:"product_img_front",type: "blob", nullable: false)]
-    private BlobType $imgFront;
+    #[ORM\Column(name:"product_img_front",type: "string", nullable: false)]
+    private string $imgFront;
 
     #[ORM\Column(name:"product_packaging", type: "string")]
     private string $packaging;
@@ -40,7 +39,7 @@ class Product {
     private float $quantity;
 
     #[ORM\ManyToOne(targetEntity: Nutriscore::class, fetch: "LAZY")]
-    #[ORM\JoinColumn(name: "nutriscore_id", referencedColumnName: "nutriscore_id")]
+    #[ORM\JoinColumn(name: "nutriscore_name", referencedColumnName: "nutriscore_name")]
     private Nutriscore $nutriscore;
 
 
@@ -48,35 +47,35 @@ class Product {
     #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
     #[ORM\InverseJoinColumn(name:"category_id", referencedColumnName: "category_id")]
     #[ORM\ManyToMany(targetEntity: Category::class, fetch: "LAZY")]
-    private ArrayCollection|Category $category;
+    private string $category;
 
     #[ORM\JoinTable(name: "location")]
     #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
     #[ORM\InverseJoinColumn(name:"country_id", referencedColumnName: "country_id")]
     #[ORM\ManyToMany(targetEntity: Country::class, fetch: "LAZY")]
-    private ArrayCollection|Country $countries;
+    private string$countries;
 
 
     #[ORM\JoinTable(name: "product_keyword")]
     #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
     #[ORM\InverseJoinColumn(name:"keyword_id", referencedColumnName: "keyword_id")]
     #[ORM\ManyToMany(targetEntity: keyword::class, fetch: "LAZY")]
-    private ArrayCollection|Keyword $keywords;
+    private string $keywords;
 
     #[ORM\JoinTable(name: "product_nutriment")]
     #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
     #[ORM\InverseJoinColumn(name:"nutriment_id", referencedColumnName: "nutriment_id")]
     #[ORM\ManyToMany(targetEntity: Nutriment::class, fetch: "LAZY")]
-    private ArrayCollection|Nutriment $nutriments;
+    private string $nutriments;
 
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: "composition")]
-    private Collection $myComposer;
+    private string $myComposer;
 
     #[ORM\JoinTable(name: "product_composition")]
     #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
     #[ORM\InverseJoinColumn(name:"product_code_1", referencedColumnName: "product_code")]
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: "myComposer", fetch: "LAZY")]
-    private ArrayCollection|Product $composition;
+    private string $composition;
 
     #[ORM\Column(name: "product_created_at", type: "datetime", nullable: false)]
     private \DateTimeInterface $createdAt;
@@ -135,11 +134,11 @@ class Product {
         return $this;
     }
 
-    public function getImgFront(): ?BlobType
+    public function getImgFront(): ?string
     {
         return $this->imgFront;
     }
-    public function setImgFront(BlobType $pImgFront): self
+    public function setImgFront(string $pImgFront): self
     {
         $this->imgFront = $pImgFront;
         return $this;
@@ -165,57 +164,57 @@ class Product {
         return $this;
     }
 
-    public function getNutriscore(): ?Nutriscore
+    public function getNutriscore(): ?string
     {
-        return $this->nutriscore;
+        return $this->nutriscore ?? '';
     }
     public function setNutriscore(?Nutriscore $pNutriscore): self
     {
         $this->nutriscore = $pNutriscore;
         return $this;
     }
-    public function getCategory(): ?Category
+    public function getCategory(): ?string
     {
         return $this->category;
     }
-    public function setCategory(?Category $pCategory): self
+    public function setCategory(?string $pCategory): self
     {
         $this->category = $pCategory;
         return $this;
     }
 
-    public function getCountries(): ArrayCollection|Country
+    public function getCountries(): ?string
     {
         return $this->countries;
     }
-    public function setCountries(ArrayCollection|Country $pCountries): self
+    public function setCountries(?string $pCountries): self
     {
         $this->countries = $pCountries;
         return $this;
     }
-    public function getKeywords(): ArrayCollection|Keyword
+    public function getKeywords(): string
     {
         return $this->keywords;
     }
-    public function setKeywords(ArrayCollection|Keyword $pKeywords): self
+    public function setKeywords(string $pKeywords): self
     {
         $this->keywords = $pKeywords;
         return $this;
     }
-    public function getNutriments(): ArrayCollection|Nutriment
+    public function getNutriments(): string
     {
         return $this->nutriments;
     }
-    public function setNutriments(ArrayCollection|Nutriment $pNutriments): self
+    public function setNutriments(string $pNutriments): self
     {
         $this->nutriments = $pNutriments;
         return $this;
     }
-    public function getComposition(): ArrayCollection|Product
+    public function getComposition(): string
     {
         return $this->composition;
     }
-    public function setComposition(ArrayCollection|Product $pComposition): self
+    public function setComposition(string $pComposition): self
     {
         $this->composition = $pComposition;
         return $this;
