@@ -21,4 +21,12 @@ services:
             - '../src/Kernel.php'
 
     # add more service definitions when explicit configuration is needed
+    App\ClientApi\OpenFactFoodapi:
+        arguments:
+            $client: '@http_client'
+    App\Repository\Product\ProductRepository:
+        class: App\Repository\Product\ProductRepository
+        arguments:
+            $registry: '@doctrine'
+            $openFoodFactsApi: '@App\ClientApi\OpenFoodFactsApi'
     # please note that last definitions always *replace* previous ones
