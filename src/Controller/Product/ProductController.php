@@ -15,9 +15,10 @@ class ProductController extends AbstractController
     private ProductService $productService;
     private ProductMapper $productMapper;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, ProductMapper $productMapper)
     {
         $this->productService = $productService;
+        $this->productMapper = $productMapper;
     }
 
     #[Route("/product/{productName}", name: "find_products_by_name", methods: ["GET"])]
@@ -45,4 +46,5 @@ class ProductController extends AbstractController
             throw new \InvalidArgumentException("Invalid product code format.");
         }
     }
+
 }
