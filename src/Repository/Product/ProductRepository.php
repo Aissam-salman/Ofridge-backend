@@ -4,15 +4,15 @@ namespace App\Repository\Product;
 use App\Entity\Product\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\ClientApi\OpenFactFoodapi;
+use App\ClientApi\OpenFactFoodApi;
 
 class ProductRepository extends ServiceEntityRepository
 {
-    private OpenFactFoodapi $openFactFoodapi;
-    public function __construct(ManagerRegistry $registry,OpenFactFoodapi $openFactFoodapi)
+    private OpenFactFoodApi $openFactFoodApi;
+    public function __construct(ManagerRegistry $registry,OpenFactFoodApi $openFactFoodApi)
     {
         parent::__construct($registry, Product::class);
-        $this->openFactFoodapi = $openFactFoodapi;
+        $this->openFactFoodApi = $openFactFoodApi;
     }
     public function findProductsByProductName(string $productName): Product|array
     {
@@ -45,14 +45,14 @@ class ProductRepository extends ServiceEntityRepository
         if (!is_string($keyword) || strlen(trim($keyword)) == 0) {
             throw new \InvalidArgumentException("Product name must be a non-empty string.");
         }
-        return $this->openFactFoodapi->getByKeyword($keyword);
+        return $this->openFactFoodApi->getByKeyword($keyword);
     }
     public function apiFindProductsByBarcode(int $barcode): array
     {
         if (!is_int($barcode) || preg_match('/^[0-9]+$/', $barcode) === 0) {
             throw new \InvalidArgumentException("Product code must be an integer.");
         }
-        return $this->openFactFoodapi->getByBarcode($barcode);
+        return $this->openFactFoodApi->getByBarcode($barcode);
     }
 }
 

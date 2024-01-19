@@ -17,7 +17,7 @@ class Nutriment {
     #[ORM\Column(name: "nutriment_name", type: "string", length: 30, nullable: false)]
     private string $name;
 
-    #[ORM\ManyToOne(targetEntity: Unit::class, inversedBy: "nutriment")]
+    #[ORM\ManyToOne(targetEntity: Unit::class, mappedBy: "nutriment")]
     #[ORM\JoinColumn(name: "unit_id", referencedColumnName: "unit_id")]
     private Unit $unit;
 

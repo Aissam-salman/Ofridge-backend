@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Product\Nutriscore as Nutriscore;
 use App\Entity\Product\Category as Category;
 use App\Entity\Product\Country as Country;
+use App\Entity\Product\Keyword as Keyword;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -39,7 +40,7 @@ class Product {
     private float $quantity;
 
     #[ORM\ManyToOne(targetEntity: Nutriscore::class, fetch: "LAZY")]
-    #[ORM\JoinColumn(name: "nutriscore_name", referencedColumnName: "nutriscore_name")]
+    #[ORM\JoinColumn(name: "nutriscore_id", referencedColumnName: "nutriscore_id")]
     private Nutriscore $nutriscore;
 
 
@@ -53,13 +54,13 @@ class Product {
     #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
     #[ORM\InverseJoinColumn(name:"country_id", referencedColumnName: "country_id")]
     #[ORM\ManyToMany(targetEntity: Country::class, fetch: "LAZY")]
-    private string$countries;
+    private string $countries;
 
 
     #[ORM\JoinTable(name: "product_keyword")]
     #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
     #[ORM\InverseJoinColumn(name:"keyword_id", referencedColumnName: "keyword_id")]
-    #[ORM\ManyToMany(targetEntity: keyword::class, fetch: "LAZY")]
+    #[ORM\ManyToMany(targetEntity: Keyword::class, fetch: "LAZY")]
     private string $keywords;
 
     #[ORM\JoinTable(name: "product_nutriment")]

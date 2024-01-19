@@ -22,9 +22,13 @@ class ProductController extends AbstractController
     }
 
     #[Route("/product/{productName}", name: "find_products_by_name", methods: ["GET"])]
-    public function findProductByName(ProductDto $productDto): JsonResponse
+    public function findProductByName(Request $request): JsonResponse
     {
         try {
+            $productName = $request->attributes->get("productName");
+            $productDto = new ProductDto();
+            $productDto->setName($productName);
+            dump($productDto);
             $this->validateProductDto($productDto);
             $result = $this->productService->findProductsByProductName($productDto->name);
             return $this->json(['result' => $result]);
@@ -35,7 +39,7 @@ class ProductController extends AbstractController
     private function validateProductDto(ProductDto $productDto): void
     {
         if ($productDto->name === null && $productDto->id === null) {
-            throw new \InvalidArgumentException("Product name or code is required.");
+            throw new \InvalidArgumentException("Product ici name or code is required.");
         }
 
         if ($productDto->name !== null && !is_string($productDto->name)) {

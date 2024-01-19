@@ -5,9 +5,9 @@ namespace App\ClientApi;
 use Symfony\Contracts\HttpClient\HttpClientInterface as HttpClientInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class OpenFactFoodapi
+class OpenFactFoodApi
 {
-    private static ?OpenFactFoodapi $instance = null;
+    private static ?OpenFactFoodApi $instance = null;
     private HttpClientInterface $client;
 
     const PATTERN_ONLY_WORDS= "/\b\w+\b/";
@@ -17,7 +17,7 @@ class OpenFactFoodapi
     {
         $this->client = $client;
     }
-    public static function getInstance(HttpClientInterface $client): OpenFactFoodapi
+    public static function getInstance(HttpClientInterface $client): OpenFactFoodApi
     {
         if (self::$instance === null) {
             self::$instance = new self($client);

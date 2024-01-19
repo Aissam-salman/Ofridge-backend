@@ -19,6 +19,9 @@ class Unit {
     #[ORM\Column(name: "unit_updated_at", type: "datetime", nullable: false)]
     private \DateTimeInterface $updatedAt;
 
+    #[ORM\ManyToOne(targetEntity: Nutriment::class)]
+    #[ORM\JoinColumn(name: "nutriment_id", referencedColumnName)]
+
     public function getId(): ?int
     {
         return $this->id;
