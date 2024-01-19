@@ -4,26 +4,32 @@ namespace App\Entity\Recipe;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity]
-#[ORM\Table(name: 'recipe_type')]
-class Recipe_Type {
+#[ORM\Table(name: "step")]
+class Step {
+
 
 
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
-    #[ORM\Column(name: "recipe_type_id", type: "integer")]
+    #[ORM\Column(name: "step_id", type: "integer")]
     private int $id;
 
 
-    #[ORM\Column(name: "recipe_type_name", type: "string", length: 50)]
-    private string $recipeTypeName;
+    #[ORM\Column(name: "step_name", type: "string", length: 50)]
+    private string $stepName;
+
+    #[ORM\Column(name: "step_description", type: "string", length: 50)]
+    private string $stepDescription;
 
 
-    
-    #[ORM\Column(name: "recipe_type_created_at", type: "datetime", nullable: false)]
+
+    #[ORM\Column(name: "step_created_at", type: "datetime", nullable: false)]
     private \DateTimeInterface $createdAt;
-    #[ORM\Column(name: "recipe_type_updated_at", type: "datetime", nullable: false)]
+    #[ORM\Column(name: "step_updated_at", type: "datetime", nullable: false)]
     private \DateTimeInterface $updatedAt;
+
 
 
 
@@ -34,17 +40,30 @@ class Recipe_Type {
     }
 
     
-    public function getRecipeName(): ?string
+    public function getStepName(): ?string
     {
-        return $this->recipeTypeName;
+        return $this->stepName;
     }
 
 
-    public function setName(string $pName): self
+    public function setStepName(string $pName): self
     {
-        $this->recipeTypeName = $pName;
+        $this->stepName = $pName;
         return $this;
     }
+
+    public function getStepDescription(): ?string
+    {
+        return $this->stepDescription;
+    }
+
+
+    public function setStepDescription(string $pDescription): self
+    {
+        $this->stepDescription = $pDescription;
+        return $this;
+    }
+
 
     public function getCreatedAt():?\DateTimeInterface
     {
@@ -55,6 +74,7 @@ class Recipe_Type {
         $this->createdAt = $createdAt;
         return $this;
     }
+
     public function getUpdatedAt():?\DateTimeInterface
     {
         return $this->updatedAt;
@@ -65,4 +85,3 @@ class Recipe_Type {
         return $this;
     }
 }
-

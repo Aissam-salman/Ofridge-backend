@@ -3,11 +3,15 @@
 namespace App\Entity\Recipe;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Recipe;
+use App\Entity\Recipe\Step as Step;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\Product\Product as Product;
+
+
+
+
 #[ORM\Entity]
 #[ORM\Table(name: "recipe")]
-
-
 class Recipe
 {
     #[ORM\Id]
@@ -31,105 +35,152 @@ class Recipe
     #[ORM\Column(name: "recipe_level", type: "string")]
     private string $recipeLevel;
 
-
-    #[ORM\JoinTable(name:"search_recipe")] // Création de la tab + son nom
-    #[ORM\JoinColumn(name:"user_app_id", referencedColumnName:"recipe_id")]
-    #[ORM\InverseJoinColumn(name:"recipe_id", referencedColumnName:"recipe_id")]
-    #[ORM\ManyToMany(targetEntity:Recipe::class, fetch:"LAZY")] //
-    
-    private array[Recipe] $search_recipe; 
+    #[ORM\JoinTable(name: "recipe_step")]
+    #[ORM\JoinColumn(name: "recipe_id", referencedColumnName: "recipe_id")]
+    #[ORM\InverseJoinColumn(name:"step_id", referencedColumnName: "step_id")]
+    #[ORM\ManyToMany(targetEntity: Step::class, fetch: "LAZY")]
+    private ArrayCollection|Step $step;
 
 
+    #[ORM\JoinTable(name: "recipe_product")]
+    #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
+    #[ORM\InverseJoinColumn(name:"recipe_id", referencedColumnName: "recipe_id")]
+    #[ORM\ManyToMany(targetEntity: Product::class, fetch: "LAZY")]
+    private ArrayCollection|Product $recipeProduct;
 
 
+    #[ORM\ManyToOne(targetEntity: Recipe_Type::class, fetch: "LAZY")]
+    #[ORM\JoinColumn(name: "recipe_type_id", referencedColumnName: "recipe_type_id")]
+    private Recipe_type $recipeType;
+
+    #[ORM\Column(name: "recipe_updated_at", type: "datetime", nullable: false)]
+    private \DateTimeInterface $updatedAt;
+
+    #[ORM\Column(name: "recipe_created_at", type: "datetime", nullable: false)]
+    private \DateTimeInterface $createdAt;
 
 
-    // Getters
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    
+    public function getRecipeName(): ?string
     {
-        return $this->email;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
+        return $this->recipeName;
     }
 
 
-    public function getLastName(): ?string
+    public function setName(string $pName): self
     {
-        return $this->lastName;
-    }
-
-
-    public function getBirthday(): ?DateType
-    {
-        return $this->birthday;
-    }
-
-
-    public function getPassword(): ?string
-    {
-        return $this->password;
-    }
-
-
-    public function getImg(): ?BlobType
-    {
-        return $this->img;
-    }
-
-
-
-
-
-    // Setters
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
+        $this->recipeName = $pName;
         return $this;
     }
 
-    public function setEmail(string $email): self
+
+    public function getRecipeTime(): ?float
     {
-        $this->email = $email;
+        return $this->recipeTimeCooking;
+    }
+
+
+    public function setRecipeTime(float $pTime): self
+    {
+        $this->recipeTimeCooking = $pTime;
         return $this;
     }
 
-    public function setFirstName(string $firstName): self
+    public function getRecipeRate(): ?int
     {
-        $this->firstName = $firstName;
+        return $this->recipeRate;
+    }
+
+
+    public function setRecipeRate(int $pRate): self
+    {
+        $this->recipeRate = $pRate;
         return $this;
     }
 
-    public function setLastName(string $lastName): self
+    public function getRecipeLevel(): ?string
     {
-        $this->lastName = $lastName;
+        return $this->recipeLevel;
+    }
+
+    public function setRecipeLevel(string $pLevel): self
+    {
+        $this->recipeLevel = $pLevel;
         return $this;
     }
 
-    public function setBirthday(DateType $birthday): self
+    public function getStep(): ArrayCollection|Step
     {
-        $this->birthday = $birthday;
+        return $this->step;
+    }
+
+    public function setStep(ArrayCollection|Step $pStep): self
+    {
+        $this->step = $pStep;
         return $this;
     }
 
-    public function setPassword(string $password): self
+
+    public function getRecipeProduct(): ArrayCollection|Product
     {
-        $this->password = $password;
+        return $this->recipeProduct;
+    }
+
+    public function setRecipeProduct(ArrayCollection|Product $pProduct): self
+    {
+        $this->recipeProduct = $pProduct;
         return $this;
     }
 
-    public function setImg(BlobType $img): self
+
+    public function getRecipeType(): ?Recipe_type
     {
-        $this->img = $img;
+        return $this->recipeType;
+    }
+
+    public function setRecipeType(?Recipe_type $pType): self
+    {
+        $this->recipeType = $pType;
+        return $this;
+    }
+
+    public function getCreatedAt():?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+    public function setCreatedAt(\DateTimeInterface $pCreatedAt): self
+    {
+        $this->createdAt = $pCreatedAt;
+        return $this;
+    }
+    public function getUpdatedAt():?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+    public function setUpdatedAt(\DateTimeInterface $pUpdatedAt): self
+    {
+        $this->updatedAt = $pUpdatedAt;
         return $this;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
