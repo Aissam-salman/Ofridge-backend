@@ -11,7 +11,7 @@ RUN apt-get update && \
     libicu-dev
 
 # Installer les extensions PHP nécessaires
-RUN docker-php-ext-install pdo pdo_mysql zip intl opcache
+RUN docker-php-ext-install pdo pdo_mysql zip intl opcache mysqli
 RUN docker-php-ext-configure intl
 # Installer APCu
 RUN pecl install apcu && docker-php-ext-enable apcu
