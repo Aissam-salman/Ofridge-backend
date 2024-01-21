@@ -40,8 +40,8 @@ class Product {
     private float $quantity;
 
     #[ORM\ManyToOne(targetEntity: Nutriscore::class, fetch: "LAZY")]
-    #[ORM\JoinColumn(name: "nutriscore_id", referencedColumnName: "nutriscore_id")]
-    private Nutriscore $nutriscore;
+    #[ORM\JoinColumn(name: "fk_nutriscore_id", referencedColumnName: "nutriscore_id")]
+    private ?Nutriscore $nutriscore;
 
 
     #[ORM\JoinTable(name: "product_category")]
