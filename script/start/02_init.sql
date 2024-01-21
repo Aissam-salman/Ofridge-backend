@@ -10,7 +10,7 @@ VALUES (
         'example@example.com', 'John', 'Do', '1999-01-01', 'hashpass', "/public/assets/profil/John_Do.jpg"
     );
 
-INSER INTO nutriscore (nutriscore_name)
+INSERT INTO nutriscore (nutriscore_name)
 VALUES ('A'),
     ('B'),
     ('C'),
@@ -29,3 +29,6 @@ INSERT INTO nutriment(nutriment_name)
 VALUES ('Calories'),
     ('Carbohydrates'),
     ('Fat');
+
+
+    
