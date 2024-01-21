@@ -40,8 +40,8 @@ class Product {
     private float $quantity;
 
     #[ORM\ManyToOne(targetEntity: Nutriscore::class, fetch: "LAZY")]
-    #[ORM\JoinColumn(name: "nutriscore_id", referencedColumnName: "nutriscore_id")]
-    private Nutriscore $nutriscore;
+    #[ORM\JoinColumn(name: "fk_nutriscore_id", referencedColumnName: "nutriscore_id")]
+    private ?Nutriscore $nutriscore;
 
 
     #[ORM\JoinTable(name: "product_category")]
@@ -78,9 +78,9 @@ class Product {
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: "myComposer", fetch: "LAZY")]
     private string $composition;
 
-    #[ORM\Column(name: "product_created_at", type: "datetime", nullable: false)]
+    #[ORM\Column(name: "product_created_at", type: "datetime")]
     private \DateTimeInterface $createdAt;
-    #[ORM\Column(name: "product_updated_at", type: "datetime", nullable: false)]
+    #[ORM\Column(name: "product_updated_at", type: "datetime")]
     private \DateTimeInterface $updatedAt;
 
 

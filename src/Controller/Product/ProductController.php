@@ -28,9 +28,9 @@ class ProductController extends AbstractController
             $productName = $request->attributes->get("productName");
             $productDto = new ProductDto();
             $productDto->setName($productName);
-            dump($productDto);
             $this->validateProductDto($productDto);
             $result = $this->productService->findProductsByProductName($productDto->name);
+            dump($this->json(['result' => $result]));
             return $this->json(['result' => $result]);
         } catch (\Exception $exception) {
             return $this->json(['error' => $exception->getMessage()], 400);

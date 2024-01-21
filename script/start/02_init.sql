@@ -10,7 +10,11 @@ VALUES (
         'example@example.com', 'John', 'Do', '1999-01-01', 'hashpass', "/public/assets/profil/John_Do.jpg"
     );
 
+<<<<<<< HEAD
 INSERT INTO nutriscore (nutriscore_name)
+=======
+INSERT INTO nutriscore (nutriscore_grade)
+>>>>>>> origin/test
 VALUES ('A'),
     ('B'),
     ('C'),
@@ -25,6 +29,7 @@ VALUES ('g'),
     ('mg'),
     ('kcal');
 
+<<<<<<< HEAD
 INSERT INTO nutriment(nutriment_name)
 VALUES ('Calories'),
     ('Carbohydrates'),
@@ -32,3 +37,9 @@ VALUES ('Calories'),
 
 
     
+=======
+INSERT INTO nutriment(nutriment_name, fk_unit_id)
+VALUES ('Calories', 5),
+    ('Carbohydrates', 1),
+    ('Fat', 1);
+>>>>>>> origin/test

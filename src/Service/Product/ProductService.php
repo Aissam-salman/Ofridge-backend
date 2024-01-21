@@ -15,7 +15,7 @@ class ProductService
     {
         $databaseResult = $this->productRepository->findProductsByProductName($productName);
         $apiResult = $this->productRepository->apiFindProductsByKeyword($productName);
-
+        dump($databaseResult);
         return $this->getFirstNonEmptyResult([$databaseResult, $apiResult]);
     }
     public function findProductsByProductCode(int $productCode): Product|array

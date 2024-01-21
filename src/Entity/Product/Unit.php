@@ -20,7 +20,8 @@ class Unit {
     private \DateTimeInterface $updatedAt;
 
     #[ORM\ManyToOne(targetEntity: Nutriment::class)]
-    #[ORM\JoinColumn(name: "nutriment_id", referencedColumnName)]
+    #[ORM\JoinColumn(name: "nutriment_id", referencedColumnName: "nutriment_id")]
+    private Nutriment $nutriment;
 
     public function getId(): ?int
     {
