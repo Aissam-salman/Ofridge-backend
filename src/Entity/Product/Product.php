@@ -78,9 +78,9 @@ class Product {
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: "myComposer", fetch: "LAZY")]
     private string $composition;
 
-    #[ORM\Column(name: "product_created_at", type: "datetime", nullable: false)]
+    #[ORM\Column(name: "product_created_at", type: "datetime")]
     private \DateTimeInterface $createdAt;
-    #[ORM\Column(name: "product_updated_at", type: "datetime", nullable: false)]
+    #[ORM\Column(name: "product_updated_at", type: "datetime")]
     private \DateTimeInterface $updatedAt;
 
 
