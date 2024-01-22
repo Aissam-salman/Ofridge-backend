@@ -30,7 +30,7 @@ class ProductController extends AbstractController
             $productDto->setName($productName);
             $this->validateProductDto($productDto);
             $result = $this->productService->findProductsByProductName($productDto->name);
-            dump($this->json(['result' => $result]));
+            dump($result);
             return $this->json(['result' => $result]);
         } catch (\Exception $exception) {
             return $this->json(['error' => $exception->getMessage()], 400);
@@ -39,7 +39,7 @@ class ProductController extends AbstractController
     private function validateProductDto(ProductDto $productDto): void
     {
         if ($productDto->name === null && $productDto->id === null) {
-            throw new \InvalidArgumentException("Product ici name or code is required.");
+            throw new \InvalidArgumentException("Product name or code is required.");
         }
 
         if ($productDto->name !== null && !is_string($productDto->name)) {

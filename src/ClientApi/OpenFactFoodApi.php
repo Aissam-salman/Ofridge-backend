@@ -10,8 +10,8 @@ class OpenFactFoodApi
     private static ?OpenFactFoodApi $instance = null;
     private HttpClientInterface $client;
 
-    const PATTERN_ONLY_WORDS= "/\b\w+\b/";
-    const PATTERN_ONLY_INTEGER= "/^\d+$/";
+    const PATTERN_ONLY_WORDS= "/[A-Za-z]+/i";
+    const PATTERN_ONLY_INTEGER= "/[0-9]+/i";
 
     public function __construct(HttpClientInterface $client)
     {
@@ -27,7 +27,8 @@ class OpenFactFoodApi
 
     public function getByKeyword(string $keyword): array
     {
-        if (preg_match_all(self::PATTERN_ONLY_WORDS, $keyword)) {
+        dump($keyword);
+        if (!preg_match(self::PATTERN_ONLY_WORDS, $keyword)) {
             throw new \Exception('Invalid keyword');
         } else {
             $url = "https://world.openfoodfacts.net/api/v2/search?_keywords=$keyword&lc=fr&fields=product_name,allergens_imported,brands,generic_name,selected_images,packaging_text,quantity,nutriscore_2023_tags,_keywords,categories_tags,countries,nutriments,ingredients_text,_id&page_size=5";
@@ -65,10 +66,8 @@ class OpenFactFoodApi
     {
         if ($response->getStatusCode() === 200) {
             $content = $response->toArray();
-            // Ajoutez ici d'autres validations si nécessaire
             return $content;
         } else {
-            // Gestion des erreurs ici
             throw new \Exception('Erreur lors de la requête vers l\'API.');
         }
     }
