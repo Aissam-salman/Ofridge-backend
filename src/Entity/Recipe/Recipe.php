@@ -27,6 +27,9 @@ class Recipe
     #[ORM\Column(name: "recipe_time_cooking", type: "float", length: 5)]
     private float $recipeTimeCooking;
 
+    #[ORM\Column(name:"recipe_img",type: "string", nullable: false)]
+    private string $imgRecipe;
+
 
     #[ORM\Column(name: "recipe_rate", type: "integer", length: 15)]
     private int $recipeRate;
@@ -89,6 +92,16 @@ class Recipe
     public function setRecipeTime(float $pTime): self
     {
         $this->recipeTimeCooking = $pTime;
+        return $this;
+    }
+
+    public function getImgRecipe(): ?string
+    {
+        return $this->imgRecipe;
+    }
+    public function setImgRecipe(string $pImgRecipe): self
+    {
+        $this->imgRecipe = $pImgRecipe;
         return $this;
     }
 
