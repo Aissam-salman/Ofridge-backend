@@ -80,10 +80,10 @@ CREATE TABLE IF NOT EXISTS product(
 CREATE TABLE IF NOT EXISTS recipe(
         recipe_id INT AUTO_INCREMENT,
         recipe_name VARCHAR(50) NOT NULL,
-        recipe_time_cooking DECIMAL(2, 2),
+        recipe_time_cooking INT,
         recipe_img TEXT,
         recipe_rate INT NOT NULL,
-        repice_level VARCHAR(20),
+        recipe_level VARCHAR(20),
         fk_recipe_type_id INT NOT NULL,
         recipe_created_at DATETIME DEFAULT NOW(),
         recipe_updated_at DATETIME DEFAULT NOW() ON UPDATE NOW(),
@@ -116,16 +116,12 @@ CREATE TABLE IF NOT EXISTS product_nutriment(
         product_code INT,
         nutriment_id INT,
         product_nutriment_quantity DECIMAL(4, 4) NOT NULL,
-        PRIMARY KEY(product_code, nutriment_id),
-        FOREIGN KEY(product_code) REFERENCES product(product_code),
-        FOREIGN KEY(nutriment_id) REFERENCES nutriment(nutriment_id)
+        PRIMARY KEY(product_code, nutriment_id)
 );
 CREATE TABLE IF NOT EXISTS recipe_product(
         product_code INT,
         recipe_id INT,
-        PRIMARY KEY(product_code, recipe_id),
-        FOREIGN KEY(product_code) REFERENCES product(product_code),
-        FOREIGN KEY(recipe_id) REFERENCES recipe(recipe_id)
+        PRIMARY KEY(product_code, recipe_id)
 );
 CREATE TABLE IF NOT EXISTS search_product(
         product_code INT,
@@ -135,16 +131,12 @@ CREATE TABLE IF NOT EXISTS search_product(
 CREATE TABLE IF NOT EXISTS product_composition(
         product_code INT,
         product_code_1 INT,
-        PRIMARY KEY(product_code, product_code_1),
-        FOREIGN KEY(product_code) REFERENCES product(product_code),
-        FOREIGN KEY(product_code_1) REFERENCES product(product_code)
+        PRIMARY KEY(product_code, product_code_1)
 );
 CREATE TABLE IF NOT EXISTS recipe_step(
         recipe_id INT,
         step_id INT,
-        PRIMARY KEY(recipe_id, step_id),
-        FOREIGN KEY(recipe_id) REFERENCES recipe(recipe_id),
-        FOREIGN KEY(step_id) REFERENCES step(step_id)
+        PRIMARY KEY(recipe_id, step_id)
 );
 
 ALTER TABLE product
@@ -195,6 +187,4 @@ ADD CONSTRAINT fk_product_1
 FOREIGN KEY(product_code_1) REFERENCES product(product_code);
 ALTER TABLE recipe_step
 ADD CONSTRAINT fk_recipe1
-FOREIGN KEY(recipe_id) REFERENCES recipe(recipe_id),
-ADD CONSTRAINT fk_step
-FOREIGN KEY(step_id) REFERENCES step(step_id);
+FOREIGN KEY(recipe_id) REFERENCES recipe(recipe_id);

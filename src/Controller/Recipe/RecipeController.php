@@ -37,6 +37,6 @@ class RecipeController extends AbstractController
             ];
         }
 
-        return new JsonResponse($recipeData);
+        return new JsonResponse($recipes);
     }
 }

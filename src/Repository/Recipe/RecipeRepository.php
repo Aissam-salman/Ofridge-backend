@@ -17,15 +17,14 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
 
-    public function getAllRecipes()
+    public function getAllRecipes() : array
     {
-        return $this->createQueryBuilder('recipeEntity')
-            ->getQuery()
-            ->getResult();
+        
+        return $this->findAll();
     }
 
     
-    public function getRecipeById($recipeId)
+    public function getRecipeById($recipeId) :array
     {
         return $this->createQueryBuilder('recipeEntity')
             ->where('recipeEntity.id = :recipeId')
