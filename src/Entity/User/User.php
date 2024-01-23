@@ -2,68 +2,39 @@
 
 namespace App\Entity\User;
 
-use Doctrine\DBAL\Types\BlobType;
+
 use Doctrine\DBAL\Types\DateType;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Recipe;
+use App\Entity\Product;
+
+
+
 #[ORM\Entity]
 #[ORM\Table(name: "user_app")]
-
-
 class User
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]
     #[ORM\Column(name: "user_app_id", type: "integer")]
     private int $id;
-
-
     #[ORM\Column(name: "user_app_email", type: "string", length: 50)]
     private string $email;
-
-
-
     #[ORM\Column(name: "user_app_firstname", type: "string", length: 30)]
     private string $firstName;
-
-
-
-
     #[ORM\Column(name: "user_app_lastname", type: "string", length: 30)]
     private string $lastName;
-
-
-
-
     #[ORM\Column(name: "user_app_birthday", type: "date")]
     private DateType $birthday;
-
-
-
-
     #[ORM\Column(name: "user_app_password", type: "string", length: 50)]
     private string $password;
-
-
-
-
-    #[ORM\Column(name: "user_app_img", type: "blob")]
-    private BlobType $img;
-
-    #[ORM\JoinTable(name:"search_recipe")] // Création de la tab + son nom
-    #[ORM\JoinColumn(name:"user_app_id", referencedColumnName:"recipe_id")]
-    #[ORM\InverseJoinColumn(name:"recipe_id", referencedColumnName:"recipe_id")]
-    #[ORM\ManyToMany(targetEntity:Recipe::class, fetch:"LAZY")] //
-    
-    private array[Recipe] $search_recipe; 
-
-
-
-
-
-
+    #[ORM\Column(name: "user_app_img", type: "string")]
+    private string $img;
+    #[ORM\JoinTable(name: "search_product")]
+    #[ORM\JoinColumn(name: "product_code", referencedColumnName: "product_code")]
+    #[ORM\InverseJoinColumn(name:"user_app_id", referencedColumnName: "user_app_id")]
+    #[ORM\ManyToMany(targetEntity: Product::class, fetch: "LAZY")]
+    private array $search_product; 
     // Getters
-
     public function getId(): ?int
     {
         return $this->id;
@@ -98,14 +69,10 @@ class User
     }
 
 
-    public function getImg(): ?BlobType
+    public function getImg(): ?string
     {
         return $this->img;
     }
-
-
-
-
 
     // Setters
 
@@ -145,7 +112,7 @@ class User
         return $this;
     }
 
-    public function setImg(BlobType $img): self
+    public function setImg(string $img): self
     {
         $this->img = $img;
         return $this;
