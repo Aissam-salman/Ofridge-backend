@@ -13,17 +13,16 @@ class ProductService
     }
     public function findProductsByProductName(string $productName): Product|array
     {
-        $databaseResult = $this->productRepository->findProductsByProductName($productName);
-        $apiResult = $this->productRepository->apiFindProductsByKeyword($productName);
-
-        return $this->getFirstNonEmptyResult([$databaseResult, $apiResult]);
+        //$databaseResult = $this->productRepository->findProductsByProductName($productName);
+        return $this->productRepository->apiFindProductsByKeyword($productName);
+        //return $this->getFirstNonEmptyResult([ $apiResult, $databaseResult]);
     }
     public function findProductsByProductCode(int $productCode): Product|array
     {
         $databaseResult = $this->productRepository->findProductsByProductCode($productCode);
         $apiResult = $this->productRepository->apiFindProductsByBarcode($productCode);
 
-        return $this->getFirstNonEmptyResult([$databaseResult, $apiResult]);
+        return $this->getFirstNonEmptyResult([$apiResult, $databaseResult]);
     }
     private function getFirstNonEmptyResult(array $results): Product|array
     {
