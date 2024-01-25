@@ -25,16 +25,16 @@ services:
   #     - database
   #   networks:
   #     - app-network
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
-    restart: always
-    ports:
-      - 7070:80
-    environment:
-      PMA_HOST: database
-    networks:
-      - app-network
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: phpmyadmin
+  #   restart: always
+  #   ports:
+  #     - 7070:80
+  #   environment:
+  #     PMA_HOST: database
+  #   networks:
+  #     - app-network
   # nginx:
   #   image: nginx:latest
   #   container_name: nginx
