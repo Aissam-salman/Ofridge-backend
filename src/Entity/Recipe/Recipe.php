@@ -10,6 +10,7 @@ use App\Entity\Product\Product as Product;
 
 
 
+
 #[ORM\Entity]
 #[ORM\Table(name: "recipe")]
 class Recipe
@@ -61,6 +62,13 @@ class Recipe
 
     #[ORM\Column(name: "recipe_created_at", type: "datetime", nullable: false)]
     private \DateTimeInterface $createdAt;
+
+
+
+    public function __construct()
+    {
+        $this->recipeProduct = new ArrayCollection();
+    }
 
 
 

@@ -66,9 +66,7 @@ VALUES (
 
 INSERT INTO `recipe_step` (`recipe_id`, `step_id`) VALUES ('1', '1');
 
--- INSERT INTO recipe_product (
---         product_code, recipe_id
---     )
--- VALUES (
---         1, 1
---     );
+INSERT INTO `recipe_product` (`product_code`, `recipe_id`) VALUES ('1', '1');
+
+
+

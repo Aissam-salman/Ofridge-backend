@@ -84,7 +84,6 @@ CREATE TABLE IF NOT EXISTS recipe(
         recipe_img TEXT,
         recipe_rate INT NOT NULL,
         recipe_level VARCHAR(20),
-        fk_recipe_type_id INT NOT NULL,
         recipe_created_at DATETIME DEFAULT NOW(),
         recipe_updated_at DATETIME DEFAULT NOW() ON UPDATE NOW(),
         PRIMARY KEY(recipe_id)
