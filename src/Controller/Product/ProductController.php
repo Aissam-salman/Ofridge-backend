@@ -31,11 +31,14 @@ class ProductController extends AbstractController
             $this->validateProductDto($productDto);
             $result = $this->productService->findProductsByProductName($productDto->name);
             dump($result);
+            // TODO: add filter for result, send only one result of request
             return $this->json(['result' => $result]);
         } catch (\Exception $exception) {
             return $this->json(['error' => $exception->getMessage()], 400);
         }
     }
+
+    // TODO: create class validator for product
     private function validateProductDto(ProductDto $productDto): void
     {
         if ($productDto->name === null && $productDto->id === null) {
@@ -50,5 +53,4 @@ class ProductController extends AbstractController
             throw new \InvalidArgumentException("Invalid product code format.");
         }
     }
-
 }

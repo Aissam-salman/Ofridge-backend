@@ -7,8 +7,6 @@ use App\Entity\Product\Nutriscore as Nutriscore;
 use App\Entity\Product\Category as Category;
 use App\Entity\Product\Country as Country;
 use App\Entity\Product\Keyword as Keyword;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'product')]

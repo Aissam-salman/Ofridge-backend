@@ -4,16 +4,16 @@ namespace App\Repository\Product;
 use App\Entity\Product\Product;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use App\ClientApi\OpenFactFoodApi;
+use App\ClientApi\OpenFactFoodApiSingleton;
 use Symfony\Component\HttpClient\HttpClient;
 
 class ProductRepository extends ServiceEntityRepository
 {
-    private OpenFactFoodApi $openFactFoodApi;
+    private OpenFactFoodApiSingleton $openFactFoodApi;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Product::class);
-        $this->openFactFoodApi = OpenFactFoodApi::getInstance(HttpClient::create());
+        $this->openFactFoodApi = OpenFactFoodApiSingleton::getInstance(HttpClient::create());
     }
     public function findProductsByProductName(string $productName): Product|array
     {

@@ -3,11 +3,10 @@
 namespace App\ClientApi;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface as HttpClientInterface;
-use Symfony\Component\Validator\Constraints as Assert;
 
-class OpenFactFoodApi
+class OpenFactFoodApiSingleton
 {
-    private static ?OpenFactFoodApi $instance = null;
+    private static ?OpenFactFoodApiSingleton $instance = null;
     private HttpClientInterface $client;
 
     const PATTERN_ONLY_WORDS= "/[A-Za-z]+/i";
@@ -17,7 +16,7 @@ class OpenFactFoodApi
     {
         $this->client = $client;
     }
-    public static function getInstance(HttpClientInterface $client): OpenFactFoodApi
+    public static function getInstance(HttpClientInterface $client): OpenFactFoodApiSingleton
     {
         if (self::$instance === null) {
             self::$instance = new self($client);
@@ -27,7 +26,6 @@ class OpenFactFoodApi
 
     public function getByKeyword(string $keyword): array
     {
-        dump($keyword);
         if (!preg_match(self::PATTERN_ONLY_WORDS, $keyword)) {
             throw new \Exception('Invalid keyword');
         } else {

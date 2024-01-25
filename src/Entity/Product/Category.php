@@ -20,7 +20,7 @@ class Category {
     #[ORM\Column(name: "category_updated_at", type: "datetime", nullable: false)]
     private \DateTimeInterface $updatedAt;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -31,7 +31,7 @@ class Category {
         return $this;
     }
 
-    public function getName():?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -51,7 +51,7 @@ class Category {
         return $this;
     }
 
-    public function getUpdatedAt():?\DateTimeInterface
+    public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;
     }
