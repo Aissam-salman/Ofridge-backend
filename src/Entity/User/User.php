@@ -5,13 +5,14 @@ namespace App\Entity\User;
 
 use Doctrine\DBAL\Types\DateType;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\Product;
+use App\Entity\Product\Product;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
 
 #[ORM\Entity]
 #[ORM\Table(name: "user_app")]
-class User
+class User implements PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "IDENTITY")]

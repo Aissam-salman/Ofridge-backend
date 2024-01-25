@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repository\User;
 
-use App\Entity\User;
+use App\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -24,6 +24,54 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         parent::__construct($registry, User::class);
     }
+
+    // TODO: create user , delete user, get user
+ /**
+     * Créer un nouvel utilisateur
+     *
+     * @param array $userData Données de l'utilisateur à créer
+     * @return User L'utilisateur créé
+     */
+    public function createUser(array $userData): User
+    {
+        $user = new User();
+        $user->setEmail($userData['email']);
+        $user->setFirstName($userData['firstName']);
+        $user->setLastName($userData['lastName']);
+        $user->setBirthday($userData['birthday']); // Assurez-vous que le format est correct
+        $user->setPassword($userData['password']);
+        $user->setImg($userData['img']); // Assurez-vous que c'est le chemin correct vers l'image
+
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+        return $user;
+    }
+
+    /**
+     * Supprimer un utilisateur
+     *
+     * @param User $user L'utilisateur à supprimer
+     */
+    public function deleteUser(User $user): void
+    {
+        $this->getEntityManager()->remove($user);
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * Récupérer un utilisateur par son ID
+     *
+     * @param int $userId L'ID de l'utilisateur à récupérer
+     * @return User|null L'utilisateur ou null s'il n'est pas trouvé
+     */
+    public function getUserById(int $userId): ?User
+    {
+        return $this->find($userId);
+    }
+
+
+
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
